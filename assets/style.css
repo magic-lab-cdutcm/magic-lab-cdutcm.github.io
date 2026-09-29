@@ -299,7 +299,26 @@ a { color: inherit; text-decoration: none; }
 .news-modal-panel footer a:hover { color: var(--cinnabar); border-bottom-color: var(--cinnabar); }
 
 /* ===== 加入我们 ===== */
-.join-box { border: 1px solid var(--ink); padding: 46px; max-width: 840px; }
+.join-box {
+  display: flex; gap: 44px; align-items: center;
+  border: 1px solid var(--ink); padding: 46px; max-width: 880px;
+}
+.join-text { flex: 1; }
+.join-hint { color: var(--ink-60); font-size: 14px; }
+.join-qr {
+  flex: 0 0 172px; margin: 0;
+  background: #fff; border: 1px solid var(--ink);
+  padding: 12px 12px 14px; text-align: center;
+  box-shadow: 4px 4px 0 rgba(33, 30, 24, .12);
+}
+.join-qr img { width: 100%; display: block; }
+.join-qr figcaption { margin-top: 10px; }
+.join-qr b { display: block; font-family: var(--serif); font-size: 17px; letter-spacing: .06em; }
+.join-qr span { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--ink-60); margin-top: 3px; }
+@media (max-width: 720px) {
+  .join-box { flex-direction: column; align-items: flex-start; gap: 28px; }
+  .join-qr { flex: 0 0 148px; }
+}
 .join-box p { margin-bottom: 12px; color: #33302a; }
 .join-box strong { color: var(--jade); }
 .join-box a { color: var(--cinnabar); border-bottom: 1px solid var(--cinnabar); }
