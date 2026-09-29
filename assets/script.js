@@ -73,7 +73,7 @@
   var modal = document.getElementById('newsModal');
   if (newsList && pager && modal) {
     var rows = Array.prototype.slice.call(newsList.children);
-    var PER_PAGE = 6;
+    var PER_PAGE = 7;
     var pageCount = Math.ceil(rows.length / PER_PAGE);
 
     var renderPage = function (p) {
@@ -120,6 +120,15 @@
         }
       }
       document.getElementById('nmSrc').textContent = src ? src.textContent : '';
+      var pl = li.querySelector('a.paper-link');
+      if (pl) {
+        var aEl = document.createElement('a');
+        aEl.href = pl.getAttribute('href');
+        aEl.target = '_blank';
+        aEl.rel = 'noopener';
+        aEl.textContent = '论文原文 ↗';
+        document.getElementById('nmSrc').appendChild(aEl);
+      }
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -132,7 +141,10 @@
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
     rows.forEach(function (li) {
-      li.addEventListener('click', function () { openModal(li); });
+      li.addEventListener('click', function (e) {
+        if (e.target && e.target.closest && e.target.closest('a')) return;
+        openModal(li);
+      });
       li.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(li); }
       });
