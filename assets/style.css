@@ -329,6 +329,7 @@ a { color: inherit; text-decoration: none; }
 .join-qr span { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--ink-60); margin-top: 3px; }
 @media (max-width: 720px) {
   .join-box { flex-direction: column; align-items: flex-start; gap: 28px; }
+  .member-grid { grid-template-columns: 1fr; }
   .join-qr { flex: 0 0 148px; }
 }
 .join-box p { margin-bottom: 12px; color: #33302a; }
@@ -359,6 +360,38 @@ a { color: inherit; text-decoration: none; }
 /* ===== 入场（全站唯一入场动效，一次性） ===== */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.in { opacity: 1; transform: none; }
+
+/* ===== 团队成员卡 ===== */
+.team-group {
+  display: flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .2em;
+  color: var(--ink-60); margin: 44px 0 20px;
+}
+.team-group:first-of-type { margin-top: 4px; }
+.team-group::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.member-grid { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 26px; }
+.member {
+  border: 1px solid var(--line); padding: 22px 22px 20px;
+  transition: border-color .25s ease;
+}
+.member:hover { border-color: var(--ink); }
+.m-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(47, 93, 80, .08); border: 1px solid rgba(47, 93, 80, .3);
+  color: var(--jade); font-family: var(--serif); font-size: 21px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
+}
+.m-name {
+  font-family: var(--serif); font-size: 19px; font-weight: 900;
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+}
+.m-role { font-family: var(--mono); font-size: 11.5px; font-weight: 400; color: var(--cinnabar); letter-spacing: .05em; }
+.m-dir { font-size: 13.5px; color: var(--jade); margin-top: 9px; }
+.m-intro { font-size: 13.5px; color: var(--ink-60); line-height: 1.75; margin-top: 10px; text-align: justify; }
+.m-meta { margin-top: 12px; font-family: var(--mono); font-size: 12px; }
+.m-meta a { color: var(--ink-60); border-bottom: 1px solid var(--line); margin-right: 14px; transition: color .2s, border-color .2s; }
+.m-meta a:hover { color: var(--cinnabar); border-bottom-color: var(--cinnabar); }
 
 /* ===== 响应式 ===== */
 /* 宽屏：右侧预留印章装饰空间 */
