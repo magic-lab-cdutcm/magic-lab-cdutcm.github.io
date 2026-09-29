@@ -213,8 +213,25 @@ a { color: inherit; text-decoration: none; }
 .idx-row:hover .idx-arrow { opacity: 1; transform: none; }
 
 /* ===== 负责人 ===== */
-.pi-grid { display: grid; grid-template-columns: 96px 1fr; gap: 36px; align-items: start; }
+.pi-grid { display: grid; grid-template-columns: 96px minmax(0, 1fr) 190px; gap: 44px; align-items: start; }
 .pi-avatar { width: 96px; height: 96px; border-radius: 50%; border: 1px solid var(--ink); }
+.pi-stats {
+  border-left: 1px solid var(--line); padding-left: 34px;
+  display: flex; flex-direction: column; gap: 22px; align-self: center;
+}
+.pi-stat b {
+  display: block; font-family: var(--serif); font-size: 30px; font-weight: 900;
+  color: var(--jade); line-height: 1.15;
+}
+.pi-stat span { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; color: var(--ink-60); margin-top: 4px; }
+@media (max-width: 960px) {
+  .pi-grid { grid-template-columns: 96px 1fr; }
+  .pi-stats {
+    grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; gap: 18px 44px;
+    border-left: 0; padding-left: 0; border-top: 1px dashed var(--line);
+    padding-top: 20px; align-self: auto;
+  }
+}
 .pi-info h3 { font-family: var(--serif); font-size: 30px; font-weight: 900; }
 .pi-en { font-family: var(--mono); font-size: 13px; letter-spacing: .22em; color: var(--ink-60); margin-left: 14px; font-weight: 400; }
 .pi-role { color: var(--jade); font-size: 14.5px; margin: 8px 0 18px; }
