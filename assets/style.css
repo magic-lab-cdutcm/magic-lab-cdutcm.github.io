@@ -85,7 +85,7 @@ a { color: inherit; text-decoration: none; }
 .hero-stage { position: relative; display: inline-block; }
 .hero-title {
   font-family: var(--serif); font-weight: 900;
-  font-size: clamp(84px, 14vw, 168px); line-height: .95; letter-spacing: .01em;
+  font-size: clamp(44px, 14vw, 168px); line-height: .95; letter-spacing: .01em;
 }
 .hero-title .hollow {
   color: transparent;
