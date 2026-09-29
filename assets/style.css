@@ -287,12 +287,7 @@ a { color: inherit; text-decoration: none; }
 }
 @media (max-width: 560px) { .news-modal-panel { padding: 26px 22px 22px; } }
 
-/* ===== 论文标题链接 ===== */
-.paper-link {
-  color: inherit; border-bottom: 1px dashed var(--ink-40);
-  transition: color .2s, border-color .2s;
-}
-.paper-link:hover { color: var(--cinnabar); border-bottom-color: var(--cinnabar); }
+/* 弹层脚注内的原文链接 */
 .news-modal-panel footer a {
   color: var(--jade); border-bottom: 1px solid currentColor; margin-left: 16px;
 }

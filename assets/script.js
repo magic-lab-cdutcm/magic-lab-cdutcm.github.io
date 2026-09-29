@@ -120,10 +120,10 @@
         }
       }
       document.getElementById('nmSrc').textContent = src ? src.textContent : '';
-      var pl = li.querySelector('a.paper-link');
-      if (pl) {
+      var href = li.getAttribute('data-link');
+      if (href) {
         var aEl = document.createElement('a');
-        aEl.href = pl.getAttribute('href');
+        aEl.href = href;
         aEl.target = '_blank';
         aEl.rel = 'noopener';
         aEl.textContent = '论文原文 ↗';
