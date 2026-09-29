@@ -65,4 +65,82 @@
     }, { passive: true });
     apply();
   }
+
+  // —— 新闻分页 + 详情弹层 ——
+  var newsSection = document.getElementById('news');
+  var newsList = newsSection ? newsSection.querySelector('.row-list') : null;
+  var pager = document.getElementById('newsPager');
+  var modal = document.getElementById('newsModal');
+  if (newsList && pager && modal) {
+    var rows = Array.prototype.slice.call(newsList.children);
+    var PER_PAGE = 6;
+    var pageCount = Math.ceil(rows.length / PER_PAGE);
+
+    var renderPage = function (p) {
+      rows.forEach(function (li, i) {
+        li.style.display = (i >= p * PER_PAGE && i < (p + 1) * PER_PAGE) ? '' : 'none';
+      });
+      pager.innerHTML = '';
+      var mkBtn = function (label, target, state) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        if (state === 'on') { b.className = 'on'; b.disabled = true; }
+        else if (state === 'off') { b.disabled = true; }
+        else { b.addEventListener('click', function () { renderPage(target); }); }
+        pager.appendChild(b);
+      };
+      mkBtn('‹ 上一页', p - 1, p === 0 ? 'off' : 'go');
+      for (var i = 0; i < pageCount; i++) mkBtn(String(i + 1), i, i === p ? 'on' : 'go');
+      mkBtn('下一页 ›', p + 1, p === pageCount - 1 ? 'off' : 'go');
+
+      if (newsList.getBoundingClientRect().top < 0) {
+        newsSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    };
+    renderPage(0);
+
+    // 详情弹层
+    var lastFocus = null;
+    var openModal = function (li) {
+      lastFocus = document.activeElement;
+      var t = li.querySelector('time');
+      var s = li.querySelector('strong');
+      var src = li.querySelector('span');
+      document.getElementById('nmTime').textContent = t ? t.textContent : '';
+      document.getElementById('nmTitle').textContent = s ? s.textContent : '';
+      var body = document.getElementById('nmBody');
+      body.innerHTML = '';
+      var paras = (li.getAttribute('data-detail') || '').split('\n');
+      for (var k = 0; k < paras.length; k++) {
+        if (paras[k].trim()) {
+          var pEl = document.createElement('p');
+          pEl.textContent = paras[k].trim();
+          body.appendChild(pEl);
+        }
+      }
+      document.getElementById('nmSrc').textContent = src ? src.textContent : '';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('nmClose').focus();
+    };
+    var closeModal = function () {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    rows.forEach(function (li) {
+      li.addEventListener('click', function () { openModal(li); });
+      li.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(li); }
+      });
+    });
+    document.getElementById('nmClose').addEventListener('click', closeModal);
+    modal.querySelector('.news-modal-mask').addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  }
 })();
