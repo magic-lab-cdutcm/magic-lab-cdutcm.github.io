@@ -329,7 +329,6 @@ a { color: inherit; text-decoration: none; }
 .join-qr span { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .14em; color: var(--ink-60); margin-top: 3px; }
 @media (max-width: 720px) {
   .join-box { flex-direction: column; align-items: flex-start; gap: 28px; }
-  .member-grid { grid-template-columns: 1fr; }
   .join-qr { flex: 0 0 148px; }
 }
 .join-box p { margin-bottom: 12px; color: #33302a; }
@@ -371,7 +370,7 @@ a { color: inherit; text-decoration: none; }
 .team-group::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .member-grid { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 26px; }
 .member {
-  border: 1px solid var(--line); padding: 22px 22px 20px;
+  border: 1px solid var(--line); padding: 22px 22px 20px; min-width: 0;
   transition: border-color .25s ease;
 }
 .member:hover { border-color: var(--ink); }
@@ -390,7 +389,7 @@ a { color: inherit; text-decoration: none; }
 .m-dir { font-size: 13.5px; color: var(--jade); margin-top: 9px; }
 .m-intro { font-size: 13.5px; color: var(--ink-60); line-height: 1.75; margin-top: 10px; text-align: justify; }
 .m-meta { margin-top: 12px; font-family: var(--mono); font-size: 12px; }
-.m-meta a { color: var(--ink-60); border-bottom: 1px solid var(--line); margin-right: 14px; transition: color .2s, border-color .2s; }
+.m-meta a { color: var(--ink-60); border-bottom: 1px solid var(--line); margin-right: 14px; overflow-wrap: anywhere; transition: color .2s, border-color .2s; }
 .m-meta a:hover { color: var(--cinnabar); border-bottom-color: var(--cinnabar); }
 
 /* ===== 响应式 ===== */
@@ -428,6 +427,7 @@ a { color: inherit; text-decoration: none; }
   .join-box { padding: 28px 22px; }
   .wrap { padding: 0 20px; }
   .hero-stats { padding: 18px 20px 26px; }
+  .member-grid { grid-template-columns: 1fr; }
 }
 
 /* ===== 无障碍：减弱动效 ===== */
